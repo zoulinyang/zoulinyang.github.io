@@ -13,11 +13,11 @@
 
     <title>
         
-          22222222222 - LinYang的博客 | LinYang&#39;s Blog
+          &amp;&amp; - LinYang的博客 | LinYang&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://zoulinyang.github.io/2017/03/22/22222222222/">
+    <link rel="canonical" href="https://zoulinyang.github.io/2017/04/10/&amp;&amp;/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -155,7 +155,7 @@
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
-        background-image: url('/img/home-bg.jpg')
+        background-image: url('post-bg-js-module.jpg')
     }
 </style>
 <header class="intro-header" >
@@ -165,12 +165,16 @@
                 <div class="post-heading">
                     <div class="tags">
                         
+                          <a class="tag" href="/tags/#前端开发" title="前端开发">前端开发</a>
+                        
+                          <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
+                        
                     </div>
-                    <h1>22222222222</h1>
-                    <h2 class="subheading"></h2>
+                    <h1>&amp;&amp;</h1>
+                    <h2 class="subheading">且运算符</h2>
                     <span class="meta">
-                        Posted by lin yang on
-                        2017-03-22
+                        Posted by linyang on
+                        2017-04-10
                     </span>
                 </div>
             </div>
@@ -189,7 +193,11 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                
+                <blockquote>
+<p> a&amp;&amp;b(理解为如果a和b同时为真)–这是错误的理解。</p>
+</blockquote>
+<h2 id="运算规则"><a href="#运算规则" class="headerlink" title="运算规则"></a>运算规则</h2><p>如果第一个运算子的布尔值为<code>true</code>，则返回第二个运算子的值（<strong>注意是值，不是布尔值</strong>）；如果第一个运算子的布尔值为false，则直接返回 <strong>第一个运算子的值</strong> ，且不再对第二个运算子求值。<br>且运算符可以多个连用，这时返回 <strong>第一个布尔值为false的表达式的值</strong>。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">2</span> &amp;&amp; <span class="number">3</span> <span class="comment">//3</span></div><div class="line"><span class="keyword">var</span> b = <span class="string">''</span> &amp;&amp; <span class="number">3</span> <span class="comment">//''</span></div><div class="line"><span class="keyword">var</span> c = <span class="number">1</span> &amp;&amp; <span class="string">' '</span> &amp;&amp; <span class="string">''</span>  <span class="comment">//''</span></div></pre></td></tr></table></figure></p>
+
 
                 <hr>
 
@@ -197,6 +205,10 @@
 
                 <ul class="pager">
                     
+                    
+                        <li class="next">
+                            <a href="/2017/04/03/async/" data-toggle="tooltip" data-placement="top" title="Ajax&Fetch">Next Post &rarr;</a>
+                        </li>
                     
                 </ul>
 
@@ -213,6 +225,20 @@
             </div>
     <!-- Side Catalog Container -->
         
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
 
     <!-- Sidebar Container -->
 
@@ -228,6 +254,10 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
+                          <a class="tag" href="/tags/#前端开发" title="前端开发">前端开发</a>
+                        
+                          <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
+                        
                     </div>
                 </section>
                 
@@ -266,8 +296,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "zoulinyang";
-    var disqus_identifier = "https://zoulinyang.github.io/2017/03/22/22222222222/";
-    var disqus_url = "https://zoulinyang.github.io/2017/03/22/22222222222/";
+    var disqus_identifier = "https://zoulinyang.github.io/2017/04/10/&amp;&amp;/";
+    var disqus_url = "https://zoulinyang.github.io/2017/04/10/&amp;&amp;/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -451,6 +481,50 @@
 
 
 <!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;    
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
 
 
 
