@@ -13,11 +13,11 @@
 
     <title>
         
-          &amp;&amp; - LinYang的博客 | LinYang&#39;s Blog
+          ES6 - LinYang的博客 | LinYang&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://zoulinyang.github.io/2017/04/10/&amp;&amp;/">
+    <link rel="canonical" href="https://zoulinyang.github.io/2017/04/28/ES6/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -170,11 +170,11 @@
                           <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
                         
                     </div>
-                    <h1>&amp;&amp;</h1>
-                    <h2 class="subheading">且运算符</h2>
+                    <h1>ES6</h1>
+                    <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by linyang on
-                        2017-04-10
+                        2017-04-28
                     </span>
                     <span id="busuanzi_container_page_pv">
                       view <span id="busuanzi_value_page_pv"></span> times
@@ -196,11 +196,37 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <blockquote>
-<p> a&amp;&amp;b(理解为如果a和b同时为真)–这是错误的理解。</p>
-</blockquote>
-<h2 id="运算规则"><a href="#运算规则" class="headerlink" title="运算规则"></a>运算规则</h2><p>如果第一个运算子的布尔值为<code>true</code>，则返回第二个运算子的值（<strong>注意是值，不是布尔值</strong>）；如果第一个运算子的布尔值为false，则直接返回 <strong>第一个运算子的值</strong> ，且不再对第二个运算子求值。<br>且运算符可以多个连用，这时返回 <strong>第一个布尔值为false的表达式的值</strong>。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">2</span> &amp;&amp; <span class="number">3</span> <span class="comment">//3</span></div><div class="line"><span class="keyword">var</span> b = <span class="string">''</span> &amp;&amp; <span class="number">3</span> <span class="comment">//''</span></div><div class="line"><span class="keyword">var</span> c = <span class="number">1</span> &amp;&amp; <span class="string">' '</span> &amp;&amp; <span class="string">''</span>  <span class="comment">//''</span></div></pre></td></tr></table></figure></p>
-
+                <h2 id="let-amp-const"><a href="#let-amp-const" class="headerlink" title="let &amp; const"></a>let &amp; const</h2><ol>
+<li><p>块级作用域，声明的变量仅在块级作用域内有效</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a =[];</div><div class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i= <span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123;</div><div class="line">    a[i] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(i)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">a[<span class="number">6</span>]() <span class="comment">//6</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>不存在变量提升</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(str); <span class="comment">//undefined var声明的变量提升效果</span></div><div class="line"><span class="keyword">var</span> str = <span class="string">'hello'</span>;</div><div class="line"><span class="built_in">console</span>.log(bar); <span class="comment">//error 不会提升</span></div><div class="line"><span class="keyword">let</span> bar = <span class="number">2</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>暂时性死区</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> num = <span class="number">123</span>;</div><div class="line"><span class="keyword">if</span>(<span class="literal">true</span>)&#123;</div><div class="line">    num = <span class="number">456</span>; <span class="comment">//这里是暂时性死区，let声明该变量之前，此变量不可用</span></div><div class="line">    <span class="keyword">let</span> num;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>不允许重复声明</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">let</span> a = <span class="number">10</span>;</div><div class="line">    <span class="keyword">var</span> a = <span class="number">20</span>; <span class="comment">//error</span></div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span>(<span class="params">arg</span>)</span>&#123;</div><div class="line">    <span class="keyword">let</span> arg = <span class="string">'bbc'</span> <span class="comment">//不能在函数内部重新声明参数</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>const声明的是一个 <strong>只读的常量</strong> 一旦声明就必须立即初始化。不能之后赋值.<br>const声明变量的值不能改动，实际是变量指向的那个内存地址不得改动,基本类型值就保<br>存在变量指向的内存地址，而复合类型变量指向的内存地址，保存的只是一个指针。const<br>只能保证这个指针是固定的，至于它指向的数据结构是不是可变就完全不能控制。</p>
+<h2 id="变量的结构赋值"><a href="#变量的结构赋值" class="headerlink" title="变量的结构赋值"></a>变量的结构赋值</h2><ol>
+<li><p>数组的解构赋值<br>从数组中提取值，按照对应位置，对变量赋值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> [foo,[[bar]],baz] = [<span class="number">1</span>,[[<span class="number">2</span>]],<span class="number">3</span>] <span class="comment">//foo=&gt;1, bar=&gt;2 ,baz=&gt;3</span></div><div class="line"><span class="keyword">let</span>[,,third] = [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>] <span class="comment">// third=&gt;'c'</span></div><div class="line"><span class="keyword">let</span>[one,...two] = [<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>] <span class="comment">//one=&gt;5,two=&gt;6,7,8</span></div><div class="line"><span class="keyword">let</span>[a,[b],c] = [<span class="number">1</span>,[<span class="number">2</span>,<span class="number">3</span>],<span class="number">4</span>] <span class="comment">//a=&gt;1,b=&gt;2,c=&gt;4</span></div><div class="line"><span class="keyword">let</span>[foo] = []; <span class="comment">//foo=&gt;undefined</span></div><div class="line"><span class="keyword">let</span>[bar,foo] = [<span class="number">1</span>] <span class="comment">//bar=&gt;1,foo=&gt;undefined;</span></div><div class="line"><span class="keyword">let</span>[foo] = <span class="number">1</span>; <span class="comment">//error 右边不是数组会报错</span></div><div class="line"><span class="keyword">let</span>[foo=<span class="literal">true</span>] = [] <span class="comment">//foo=&gt;true 解构后严格等于undefined会使用默认值</span></div><div class="line"><span class="keyword">let</span>[x=<span class="number">1</span>] = [<span class="literal">null</span>] <span class="comment">//x=&gt;null 必须严格等于undefined才会使用默认值</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>对象的结构赋值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> &#123;foo,bar&#125; = &#123;<span class="attr">foo</span>:<span class="string">"aaa"</span>,<span class="attr">bar</span>:<span class="string">"bbb"</span>&#125; <span class="comment">//foo=&gt;"aaa" bar=&gt;"bbb"</span></div><div class="line"><span class="comment">//数组的解构是按顺序排列的，对象的解构没有次序限制，变量和属性同名，解构成功</span></div><div class="line"><span class="keyword">let</span>&#123;bar,foo&#125; = &#123;<span class="attr">foo</span>:<span class="string">"aaa"</span>,<span class="attr">bar</span>:<span class="string">"bbb"</span>&#125; <span class="comment">//bar=&gt;"bbb"</span></div><div class="line"><span class="keyword">let</span>&#123;<span class="attr">foo</span>:baz&#125; = &#123;<span class="attr">foo</span>:<span class="string">"aaa"</span>&#125; <span class="comment">//baz=&gt;"aaa"</span></div><div class="line"><span class="keyword">let</span> obj = &#123;<span class="attr">first</span>:<span class="string">"hello"</span>,<span class="attr">last</span>:<span class="string">"world"</span>&#125;;</div><div class="line"><span class="keyword">let</span>&#123;<span class="attr">first</span>:f,<span class="attr">last</span>:<span class="number">1</span>&#125; = obj; <span class="comment">//f=&gt;"hello",1=&gt;"world"</span></div><div class="line"><span class="keyword">let</span> obj = &#123;</div><div class="line">    <span class="attr">p</span>:[</div><div class="line">       <span class="string">'hello'</span>,</div><div class="line">       &#123;<span class="attr">y</span>:<span class="string">'world'</span>&#125;</div><div class="line">    ]</div><div class="line">&#125;;</div><div class="line"><span class="keyword">let</span>&#123;<span class="attr">p</span>:[x,&#123;y&#125;]&#125; = obj; <span class="comment">//x=&gt;'helo',y=&gt;'world'  p是模式，不是变量不会被赋值</span></div><div class="line"><span class="keyword">var</span> &#123;x,y=<span class="number">5</span>&#125; = &#123;<span class="attr">x</span>:<span class="number">1</span>&#125; <span class="comment">//x=&gt;1 y=&gt;5 默认值生效</span></div><div class="line"><span class="keyword">var</span> &#123;<span class="attr">x</span>:y=<span class="number">3</span>&#125; = &#123;&#125; <span class="comment">//y=&gt;3</span></div><div class="line"><span class="keyword">var</span> &#123;<span class="attr">x</span>:y=<span class="number">3</span>&#125; = &#123;<span class="attr">x</span>:<span class="number">5</span>&#125; <span class="comment">//x=&gt;5 默认值不会生效</span></div><div class="line"><span class="comment">//同样默认值生效的条件是变量的值严格等于undedined</span></div><div class="line"><span class="comment">//由于数组的本质是特殊的对象，因此数组可以对对象的属性解构</span></div><div class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</div><div class="line"><span class="keyword">let</span> &#123;<span class="number">0</span>:first,[arr.length <span class="number">-1</span>]:last&#125; = arr;</div><div class="line"><span class="comment">//first=&gt;1 last=&gt;3</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>字符串的解构赋值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> [a,b,c,d] =<span class="string">'hello'</span> <span class="comment">//a=&gt;h b=&gt;e c=&gt;l d=&gt;l</span></div><div class="line"><span class="comment">//类似数组的对象都有一个length属性，还可以对这个属性解构赋值</span></div><div class="line"><span class="keyword">let</span> &#123;<span class="attr">length</span>:len&#125; = <span class="string">'hello'</span>;</div><div class="line"><span class="comment">//len =&gt;5</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>数组和布尔值的结构赋值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//如果等号的右边是数值和布尔值，则会先转化为对象</span></div><div class="line"><span class="keyword">let</span> &#123;<span class="attr">toString</span>:s&#125; = <span class="number">123</span>; <span class="comment">//s=&gt;toString(fn)</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>5函数参数的结构赋值<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">[x,y]</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> x+y;</div><div class="line">&#125;</div><div class="line">add([<span class="number">1</span>,<span class="number">2</span>]); <span class="comment">//3</span></div><div class="line">[[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>]].map(<span class="function">(<span class="params">[a,b]</span>) =&gt;</span> a+b) <span class="comment">//[3,7]</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">move</span>(<span class="params">&#123;x=<span class="number">0</span>,y=<span class="number">0</span>&#125; =&#123;x:<span class="number">0</span>,y:<span class="number">0</span>&#125;</span>)</span>&#123;</div><div class="line">    retun[x,y]</div><div class="line">&#125;</div><div class="line">move(&#123;<span class="attr">x</span>:<span class="number">3</span>,<span class="attr">y</span>:<span class="number">8</span>&#125;); <span class="comment">//[3,8]</span></div><div class="line">move(&#123;<span class="attr">x</span>:<span class="number">3</span>); <span class="comment">//[3,undefiend]</span></div><div class="line">move() <span class="comment">//[0,0] //默认值.默认值是整个函数参数的</span></div><div class="line">[<span class="number">1</span>,<span class="literal">undefined</span>,<span class="number">3</span>].map(<span class="function">(<span class="params">x=<span class="string">'yes'</span></span>) =&gt;</span>x) <span class="comment">//[1,'yes',3] 为单个参数指定默认值</span></div></pre></td></tr></table></figure></p>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2>
 
                 <hr>
 
@@ -208,13 +234,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2017/04/28/ES6/" data-toggle="tooltip" data-placement="top" title="ES6">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2017/04/03/async/" data-toggle="tooltip" data-placement="top" title="Ajax&Fetch">Next Post &rarr;</a>
+                            <a href="/2017/04/10/&&/" data-toggle="tooltip" data-placement="top" title="&&">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -303,8 +325,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "zoulinyang";
-    var disqus_identifier = "https://zoulinyang.github.io/2017/04/10/&amp;&amp;/";
-    var disqus_url = "https://zoulinyang.github.io/2017/04/10/&amp;&amp;/";
+    var disqus_identifier = "https://zoulinyang.github.io/2017/04/28/ES6/";
+    var disqus_url = "https://zoulinyang.github.io/2017/04/28/ES6/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
